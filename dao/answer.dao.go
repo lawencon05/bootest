@@ -1,7 +1,9 @@
 package dao
 
-// import "lawencon.com/imamfarisi/models"
+import (
+	"lawencon.com/imamfarisi/models"
+)
 
-// type AnswerDao interface {
-// 	Create(hdr models.AnswerHdr, dtl []models.AnswerDtl)
-// }
+type AnswerDao interface {
+	CreateAnswer(hdr *models.AnswerHdr, dtl *[]models.AnswerDtl) error
+}

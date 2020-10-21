@@ -1,25 +1,30 @@
 package controllers
 
-// import (
-// 	"encoding/json"
-// 	"net/http"
+import (
+	"net/http"
 
-// 	"github.com/labstack/echo"
+	"github.com/labstack/echo"
 
-// 	"lawencon.com/imamfarisi/models"
-// )
+	"lawencon.com/imamfarisi/models"
+	"lawencon.com/imamfarisi/services"
+)
 
-// func SetAnswer(c *echo.Echo) {
-// 	c.POST("/answer", createAnswer)
-// }
+var answerService services.AnswerService = services.AnswerServiceImpl{}
 
-// func createAnswer(c echo.Context) error {
-// 	data := new(models.Users)
+func SetAnswer(c *echo.Group) {
+	c.POST("/answer", createAnswer)
+}
 
-// 	if err := c.Bind(data); err != nil {
-// 		return c.String(http.StatusBadRequest, "something wrong.. ")
-// 	}
+func createAnswer(c echo.Context) error {
+	data := new(models.PojoHelper)
 
-// 	result, _ := json.Marshal(data)
-// 	return c.String(http.StatusOK, string(result))
-// }
+	if err := c.Bind(data); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+
+	var err = answerService.CreateAnswer(&data.AnswerHdr, &data.AnswerDtl)
+	if err == nil {
+		return res(c, data)
+	}
+	return resErr(c, err)
+}

@@ -2,17 +2,35 @@ package main
 
 import (
 	"github.com/labstack/echo"
+	"gorm.io/gorm"
+	"lawencon.com/imamfarisi/configs"
 	"lawencon.com/imamfarisi/controllers"
-
-	"net/http"
+	"lawencon.com/imamfarisi/dao"
 )
 
 func main() {
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "it's works")
-	})
-	controllers.SetUser(e)
 
+	//get connection to db and set to dao
+	g := newConn()
+	dao.SetDao(g)
+
+	//set jwt
+	jwtGroup := configs.SetJwt(e)
+
+	//set controllers
+	controllers.SetInit(e)
+	controllers.SetUser(jwtGroup, e)
+	controllers.SetAnswer(jwtGroup)
+
+	//start server
 	e.Logger.Fatal(e.Start(":1234"))
+}
+
+func newConn() *gorm.DB {
+	g, err := configs.Conn()
+	if err == nil {
+		return g
+	}
+	panic(err)
 }

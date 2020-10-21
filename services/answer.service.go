@@ -1,7 +1,9 @@
 package services
 
-// import "lawencon.com/imamfarisi/models"
+import (
+	"lawencon.com/imamfarisi/models"
+)
 
-// type AnswerService interface {
-// 	Create(hdr models.AnswerHdr, dtl []models.AnswerDtl)
-// }
+type AnswerService interface {
+	CreateAnswer(hdr *models.AnswerHdr, dtl *[]models.AnswerDtl) error
+}

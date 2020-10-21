@@ -1,13 +1,9 @@
 package dao
 
-import (
-	"gorm.io/gorm"
-)
+import "gorm.io/gorm"
 
-func newConn() *gorm.DB{
-	g, err := conn(); 
-	if err == nil {
-		return g
-	}
-	panic(err)
+var g *gorm.DB
+
+func SetDao(gDB *gorm.DB) {
+	g = gDB
 }

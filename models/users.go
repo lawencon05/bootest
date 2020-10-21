@@ -1,15 +1,11 @@
 package models
 
 type Users struct {
-	Id     string `json : "id"`
-	Email  string `json : "email"`
-	Pwd    string `json : "pwd"`
-	RoleId string `json : roleId`
+	Email  string `json:"email"`
+	Pwd    string `json:"pwd"`
+	RoleId string `json:"roleId"`
+	Token  string `json:"token" gorm:"-" sql:"-"`
 	BaseModels
-}
-
-type Tabler interface {
-	TableName() string
 }
 
 func (Users) TableName() string {

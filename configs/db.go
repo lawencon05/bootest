@@ -1,4 +1,4 @@
-package dao
+package configs
 
 import (
 	"fmt"
@@ -16,10 +16,10 @@ const (
 	sslmode = "disable"
 )
 
-func conn() (*gorm.DB, error) {
+func Conn() (*gorm.DB, error) {
 	pg := fmt.Sprintf("host= %v user=%v password=%v dbname=%v port=%v sslmode=%v", host, user, pass, dbname, port, sslmode)
 	db, err := gorm.Open(postgres.Open(pg), &gorm.Config{})
-	
+
 	if err != nil {
 		return nil, err
 	}

@@ -1,14 +1,14 @@
 package services
 
-// import (
-// 	"lawencon.com/imamfarisi/dao"
-// 	"lawencon.com/imamfarisi/models"
-// )
+import (
+	"lawencon.com/imamfarisi/dao"
+	"lawencon.com/imamfarisi/models"
+)
 
-// var answerDao dao.AnswerDao = dao.AnswerDaoImpl{}
+var answerDao dao.AnswerDao = dao.AnswerDaoImpl{}
 
-// type AnswerServiceImpl struct{}
+type AnswerServiceImpl struct{}
 
-// func (AnswerServiceImpl) Create(hdr models.AnswerHdr, dtl []models.AnswerDtl) {
-// 	answerDao.Create(hdr, dtl)
-// }
+func (AnswerServiceImpl) CreateAnswer(hdr *models.AnswerHdr, dtl *[]models.AnswerDtl) error {
+	return answerDao.CreateAnswer(hdr, dtl)
+}

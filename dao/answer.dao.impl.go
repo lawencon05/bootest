@@ -1,12 +1,29 @@
 package dao
 
-// import (
-// 	//"fmt"
-// 	"lawencon.com/imamfarisi/models"
-// )
+import (
+	"time"
 
-// type AnswerDaoImpl struct{}
+	"gorm.io/gorm"
+	"lawencon.com/imamfarisi/models"
+)
 
-// func (AnswerDaoImpl) CreateAnswer(hdr models.AnswerHdr, dtl []models.AnswerDtl) {
-// 	//fmt.Println("created....")
-// }
+type AnswerDaoImpl struct{}
+
+func (AnswerDaoImpl) CreateAnswer(hdr *models.AnswerHdr, dtl *[]models.AnswerDtl) error{
+	return g.Transaction(func(tx *gorm.DB) error {
+		hdr.CreatedDate = time.Now()
+		if err := tx.Create(hdr).Error; err != nil {
+			return err
+		}
+
+		for _, v := range *dtl {
+			v.AnswerHdrId = *&hdr.Id
+			v.CreatedDate = time.Now()
+			if err := tx.Create(v).Error; err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
+}
