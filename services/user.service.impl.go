@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"fmt"
 
 	"golang.org/x/crypto/bcrypt"
 	"lawencon.com/imamfarisi/dao"
@@ -28,10 +27,8 @@ func (UserServiceImpl) GetUserById(id string) (models.Users, error) {
 
 func (UserServiceImpl) Login(username string, pwd string) (models.Users, error) {
 	result, err := userDao.GetUserByUsername(username)
-	fmt.Println(result, result.Count)
 	if err == nil && result.Count > 0 {
 		var err = bcrypt.CompareHashAndPassword([]byte(result.Pwd), []byte(pwd))
-		fmt.Println(err)
 		if err == nil {
 			return result, nil
 		}

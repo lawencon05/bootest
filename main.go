@@ -6,6 +6,7 @@ import (
 	"lawencon.com/imamfarisi/configs"
 	"lawencon.com/imamfarisi/controllers"
 	"lawencon.com/imamfarisi/dao"
+	"lawencon.com/imamfarisi/services"
 )
 
 func main() {
@@ -14,6 +15,7 @@ func main() {
 	//get connection to db and set to dao
 	g := newConn()
 	dao.SetDao(g)
+	services.SetService(g)
 
 	//set jwt
 	jwtGroup := configs.SetJwt(e)
