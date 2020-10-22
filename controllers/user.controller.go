@@ -62,7 +62,7 @@ func login(c echo.Context) error {
 	if err == nil {
 		v, _ := configs.CreateJwtToken(data.Email)
 		result.Token = v
-		return res(c, result)	
+		return res(c, result)
 	}
 
 	return resErr(c, err)

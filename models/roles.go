@@ -1,14 +1,7 @@
 package models
 
-import "time"
-
 type Roles struct {
-	id          string
-	roleName    string
-	code        string
-	isActive    bool
-	createdBy   string
-	updatedBy   string
-	createdDate time.Time
-	updatedDate time.Time
+	BaseModels
+	RoleName string `json:"name" gorm:"column:role_name"`
+	RoleCode string `json:"code" gorm:"unique;column:code"`
 }

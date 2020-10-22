@@ -1,14 +1,7 @@
 package models
 
-import "time"
-
 type QuestionTypes struct {
-	id          string
-	qstnName    string
-	code        string
-	isActive    bool
-	createdBy   string
-	updatedBy   string
-	createdDate time.Time
-	updatedDate time.Time
+	BaseModels
+	QuestionName string `json:"name" gorm:"column:qstn_name"`
+	QuestionCode string `json:"code" gorm:"unique;column:code"`
 }

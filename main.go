@@ -24,6 +24,8 @@ func main() {
 	controllers.SetInit(e)
 	controllers.SetUser(jwtGroup, e)
 	controllers.SetAnswer(jwtGroup)
+	controllers.SetEmployeeProfile(jwtGroup)
+	controllers.SetCandidatProfile(jwtGroup)
 
 	//start server
 	e.Logger.Fatal(e.Start(":1234"))

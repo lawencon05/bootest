@@ -8,13 +8,13 @@ import (
 )
 
 type BaseModels struct {
-	Id       string `json:"id" gorm:"primary_key"`
-	IsActive bool
-	// CreatedBy   string
-	// UpdatedBy   string
+	Id          string  `json:"id" gorm:"primaryKey"`
+	IsActive    bool    `gorm:"default:true"`
+	CreatedBy   string  `json:"createdBy"`
+	UpdatedBy   *string `json:"updatedBy"`
 	CreatedDate time.Time
-	// UpdatedDate time.Time
-	Count int64 `sql:"-" gorm:"-"`
+	UpdatedDate *time.Time
+	Count       int64 `gorm:"-"`
 }
 
 type Tabler interface {

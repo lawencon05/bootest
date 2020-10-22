@@ -2,16 +2,15 @@ package models
 
 import "time"
 
-type CandidatProfiles struct {
-	id          string
-	userId      string
-	employeeId  string
-	fullname    string
-	address     string
-	dob         time.Time
-	isActive    bool
-	createdBy   string
-	updatedBy   string
-	createdDate time.Time
-	updatedDate time.Time
+type CandidateProfiles struct {
+	BaseModels
+	UserId   string
+	Users    Users     `gorm:"foreignKey:UserId"`
+	Fullname string    `json:"fullname"`
+	Address  string    `json:"address"`
+	Dob      time.Time `json:"dob"`
+}
+
+func (CandidateProfiles) TableName() string {
+	return "tb_m_cndt_profiles"
 }

@@ -1,10 +1,10 @@
 package models
 
 type Users struct {
-	Email  string `json:"email"`
+	Email  string `json:"email" gorm:"unique"`
 	Pwd    string `json:"pwd"`
 	RoleId string `json:"roleId"`
-	Token  string `json:"token" gorm:"-" sql:"-"`
+	Token  string `json:"token" gorm:"-"`
 	BaseModels
 }
 

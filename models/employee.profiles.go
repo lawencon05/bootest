@@ -1,15 +1,13 @@
 package models
 
-import "time"
-
 type EmployeeProfiles struct {
-	id          string
-	userId      string
-	fullname    string
-	nip         string
-	isActive    bool
-	createdBy   string
-	updatedBy   string
-	createdDate time.Time
-	updatedDate time.Time
+	BaseModels
+	UserId   string `json:"userId"`
+	Users    Users  `gorm:"foreignKey:UserId"`
+	Fullname string `json:"fullname"`
+	Nip      string `json:"nip"`
+}
+
+func (EmployeeProfiles) TableName() string {
+	return "tb_m_emp_profiles"
 }

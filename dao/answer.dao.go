@@ -6,5 +6,5 @@ import (
 )
 
 type AnswerDao interface {
-	CreateAnswerHdr(hdr *models.AnswerHdr, tx *gorm.DB) error
+	CreateAnswerHdr(data *models.AnswerHdr, tx *gorm.DB) error
 }

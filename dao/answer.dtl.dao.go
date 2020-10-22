@@ -6,5 +6,5 @@ import (
 )
 
 type AnswerDtlDao interface {
-	CreateAnswerDtl(dtl *models.AnswerDtl, tx *gorm.DB) error
+	CreateAnswerDtl(data *models.AnswerDtl, tx *gorm.DB) error
 }

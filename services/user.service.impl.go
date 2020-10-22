@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 	"lawencon.com/imamfarisi/dao"
@@ -16,6 +17,7 @@ func (UserServiceImpl) CreateUser(user *models.Users) (*models.Users, error) {
 	result, err := bcrypt.GenerateFromPassword([]byte(user.Pwd), 4)
 	if err == nil {
 		user.Pwd = string(result)
+		user.CreatedDate = time.Now()
 		return userDao.CreateUser(user)
 	}
 	return nil, err
