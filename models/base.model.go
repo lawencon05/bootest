@@ -1,6 +1,11 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/gofrs/uuid"
+	"gorm.io/gorm"
+)
 
 type BaseModels struct {
 	Id       string `json:"id" gorm:"primary_key"`
@@ -14,4 +19,13 @@ type BaseModels struct {
 
 type Tabler interface {
 	TableName() string
+}
+
+func (base *BaseModels) BeforeCreate(tx *gorm.DB) error {
+	uuid, err := uuid.NewV4()
+	if err != nil {
+		return err
+	}
+	base.Id = uuid.String()
+	return nil
 }
