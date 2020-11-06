@@ -5,6 +5,7 @@ type AnswerDtl struct {
 	AnswerHdrId string
 	AnswerHdr   AnswerHdr `gorm:"foreignKey:AnswerHdrId"`
 	QuestionId  string    `json:"questionId" gorm:"column:qstn_id"`
+	Questions   Questions `gorm:"foreignKey:QuestionId"`
 	Answers     string    `json:"answers"`
 }
 

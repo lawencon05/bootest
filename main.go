@@ -34,6 +34,7 @@ func main() {
 func newConn() *gorm.DB {
 	g, err := configs.Conn()
 	if err == nil {
+		configs.MigrateSchema(g)
 		return g
 	}
 	panic(err)

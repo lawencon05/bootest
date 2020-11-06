@@ -6,3 +6,7 @@ type Questions struct {
 	QuestionTypesId string
 	QuestionTypes   QuestionTypes `gorm:"foreignKey:QuestionTypesId"`
 }
+
+func (Questions) TableName() string {
+	return "tb_m_qstn"
+}

@@ -5,7 +5,20 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	"lawencon.com/imamfarisi/models"
 )
+
+var tables = []interface{}{
+	&models.AnswerDtl{},
+	&models.AnswerHdr{},
+	&models.CandidateProfiles{},
+	&models.EmployeeProfiles{},
+	&models.QuestionTypes{},
+	&models.Questions{},
+	&models.Roles{},
+	&models.Users{},
+}
 
 const (
 	host    = "localhost"
@@ -25,4 +38,8 @@ func Conn() (*gorm.DB, error) {
 	}
 
 	return db, nil
+}
+
+func MigrateSchema(db *gorm.DB) {
+	db.AutoMigrate(tables...)
 }
