@@ -1,12 +1,13 @@
 package dao
 
 import (
-	"lawencon.com/imamfarisi/models"
+	"lawencon.com/bootest/model"
 )
 
 type CandidatProfileDaoImpl struct{}
 
-func (CandidatProfileDaoImpl) CreateCandidat(data *models.CandidateProfiles) error {
+func (CandidatProfileDaoImpl) CreateCandidat(data *model.CandidateProfiles) (e error) {
+	defer catchError(&e)
 	result := g.Create(data)
 	if result.Error == nil {
 		return nil

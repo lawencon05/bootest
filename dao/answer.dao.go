@@ -2,9 +2,9 @@ package dao
 
 import (
 	"gorm.io/gorm"
-	"lawencon.com/imamfarisi/models"
+	"lawencon.com/bootest/model"
 )
 
 type AnswerDao interface {
-	CreateAnswerHdr(data *models.AnswerHdr, tx *gorm.DB) error
+	CreateAnswerHdr(data *model.AnswerHdr, tx *gorm.DB) error
 }

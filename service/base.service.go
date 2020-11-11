@@ -1,4 +1,4 @@
-package dao
+package service
 
 import (
 	"gorm.io/gorm"
@@ -7,7 +7,7 @@ import (
 
 var g *gorm.DB
 
-func SetDao(gDB *gorm.DB) {
+func SetService(gDB *gorm.DB) {
 	g = gDB
 }
 

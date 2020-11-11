@@ -1,11 +1,11 @@
 package dao
 
 import (
-	"lawencon.com/imamfarisi/models"
+	"lawencon.com/bootest/model"
 )
 
 type UserDao interface {
-	CreateUser(data *models.Users) (*models.Users, error)
-	GetUserById(id string) (models.Users, error)
-	GetUserByUsername(username string) (models.Users, error)
+	CreateUser(data *model.Users) (*model.Users, error)
+	GetUserById(id string) (model.Users, error)
+	GetUserByUsername(username string) (model.Users, error)
 }

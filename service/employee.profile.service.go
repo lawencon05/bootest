@@ -1,9 +1,9 @@
-package dao
+package service
 
 import (
 	"lawencon.com/bootest/model"
 )
 
-type EmployeeProfileDao interface {
+type EmployeeProfileService interface {
 	CreateEmployee(data *model.EmployeeProfiles) error
 }

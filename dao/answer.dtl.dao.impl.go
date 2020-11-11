@@ -2,12 +2,13 @@ package dao
 
 import (
 	"gorm.io/gorm"
-	"lawencon.com/imamfarisi/models"
+	"lawencon.com/bootest/model"
 )
 
 type AnswerDtlDaoImpl struct{}
 
-func (AnswerDtlDaoImpl) CreateAnswerDtl(data *models.AnswerDtl, tx *gorm.DB) error{	
+func (AnswerDtlDaoImpl) CreateAnswerDtl(data *model.AnswerDtl, tx *gorm.DB) (e error) {
+	defer catchError(&e)
 	if err := tx.Create(data).Error; err != nil {
 		return err
 	}

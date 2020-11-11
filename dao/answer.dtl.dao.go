@@ -2,9 +2,9 @@ package dao
 
 import (
 	"gorm.io/gorm"
-	"lawencon.com/imamfarisi/models"
+	"lawencon.com/bootest/model"
 )
 
 type AnswerDtlDao interface {
-	CreateAnswerDtl(data *models.AnswerDtl, tx *gorm.DB) error
+	CreateAnswerDtl(data *model.AnswerDtl, tx *gorm.DB) error
 }

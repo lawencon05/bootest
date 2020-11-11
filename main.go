@@ -3,38 +3,38 @@ package main
 import (
 	"github.com/labstack/echo"
 	"gorm.io/gorm"
-	"lawencon.com/imamfarisi/configs"
-	"lawencon.com/imamfarisi/controllers"
-	"lawencon.com/imamfarisi/dao"
-	"lawencon.com/imamfarisi/services"
+	"lawencon.com/bootest/config"
+	"lawencon.com/bootest/controller"
+	"lawencon.com/bootest/dao"
+	"lawencon.com/bootest/service"
 )
 
 func main() {
 	e := echo.New()
 
-	//get connection to db and set to dao
-	g := newConn()
+	//init db and inject to dao and
+	g := initDb()
 	dao.SetDao(g)
-	services.SetService(g)
+	service.SetService(g)
 
 	//set jwt
-	jwtGroup := configs.SetJwt(e)
+	jwtGroup := config.SetJwt(e)
 
 	//set controllers
-	controllers.SetInit(e)
-	controllers.SetUser(jwtGroup, e)
-	controllers.SetAnswer(jwtGroup)
-	controllers.SetEmployeeProfile(jwtGroup)
-	controllers.SetCandidatProfile(jwtGroup)
+	controller.SetInit(e)
+	controller.SetUser(jwtGroup, e)
+	controller.SetAnswer(jwtGroup)
+	controller.SetEmployeeProfile(jwtGroup)
+	controller.SetCandidatProfile(jwtGroup)
 
 	//start server
 	e.Logger.Fatal(e.Start(":1234"))
 }
 
-func newConn() *gorm.DB {
-	g, err := configs.Conn()
+func initDb() *gorm.DB {
+	g, err := config.Conn()
 	if err == nil {
-		configs.MigrateSchema(g)
+		config.MigrateSchema(g)
 		return g
 	}
 	panic(err)
