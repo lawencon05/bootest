@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo"
 
+	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/model"
 	"lawencon.com/bootest/service"
 )
@@ -19,7 +20,7 @@ func SetUser(c *echo.Group, e *echo.Echo) {
 }
 
 func createUser(c echo.Context) (e error) {
-	defer catchError(&e)
+	defer config.CatchError(&e)
 	data := new(model.Users)
 
 	if err := c.Bind(data); err != nil {
@@ -35,7 +36,7 @@ func createUser(c echo.Context) (e error) {
 }
 
 func getUserById(c echo.Context) (e error) {
-	defer catchError(&e)
+	defer config.CatchError(&e)
 	id := c.Param("id")
 	//id := c.QueryParam("id")
 
@@ -50,7 +51,7 @@ func getUserById(c echo.Context) (e error) {
 }
 
 func login(c echo.Context) (e error) {
-	defer catchError(&e)
+	defer config.CatchError(&e)
 	data := new(model.Users)
 	if err := c.Bind(data); err != nil {
 		return resErr(c, err)

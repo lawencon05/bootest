@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/labstack/echo"
 
+	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/model"
 	"lawencon.com/bootest/service"
 )
@@ -14,7 +15,7 @@ func SetCandidatProfile(c *echo.Group) {
 }
 
 func createCandidatProfile(c echo.Context) (e error) {
-	defer catchError(&e)
+	defer config.CatchError(&e)
 	data := new(model.CandidateProfiles)
 
 	if err := c.Bind(data); err != nil {

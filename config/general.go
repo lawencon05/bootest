@@ -1,6 +1,8 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func CatchError(e *error) {
 	if err := recover(); err != nil {
