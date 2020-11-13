@@ -3,7 +3,7 @@ package controller
 import (
 	"errors"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 
 	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/model"
@@ -16,7 +16,7 @@ func SetUser(c *echo.Group, e *echo.Echo) {
 	e.POST("/user", createUser)
 	e.POST("/api/login", login)
 	c.GET("/user/:id", getUserById)
-	//c.GET("/user", getUserById)
+	// c.GET("/user", getUserById)
 }
 
 func createUser(c echo.Context) (e error) {
@@ -38,7 +38,7 @@ func createUser(c echo.Context) (e error) {
 func getUserById(c echo.Context) (e error) {
 	defer config.CatchError(&e)
 	id := c.Param("id")
-	//id := c.QueryParam("id")
+	// id := c.QueryParam("id")
 
 	var result, err = userService.GetUserById(id)
 	if err == nil {

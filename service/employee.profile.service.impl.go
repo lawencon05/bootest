@@ -14,6 +14,6 @@ type EmployeeProfileServiceImpl struct{}
 
 func (EmployeeProfileServiceImpl) CreateEmployee(data *model.EmployeeProfiles) (e error) {
 	defer config.CatchError(&e)
-	data.CreatedDate = time.Now()
+	*data.CreatedDate = model.Timestamp(time.Now())
 	return employeeDao.CreateEmployee(data)
 }

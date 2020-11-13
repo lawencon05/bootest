@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/labstack/echo"
 	"gorm.io/gorm"
 	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/controller"
@@ -10,9 +9,10 @@ import (
 )
 
 func main() {
-	e := echo.New()
+	//init echo framework
+	e := config.InitWeb()
 
-	//init db and inject to dao and
+	//init db and inject to dao and service
 	g := initDb()
 	dao.SetDao(g)
 	service.SetService(g)

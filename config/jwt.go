@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4/middleware"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 const secret = "secret"
@@ -21,6 +21,8 @@ func SetJwt(e *echo.Echo) *echo.Group {
 }
 
 func GenerateToken(username string) (string, error) {
+	defer CatchErrorGeneral()
+
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
 
@@ -38,6 +40,8 @@ func GenerateToken(username string) (string, error) {
 }
 
 func GetClaims(e echo.Context, datas ...string) map[string]interface{} {
+	defer CatchErrorGeneral()
+
 	user := e.Get("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
 	var result = map[string]interface{}{}

@@ -32,7 +32,7 @@ const (
 )
 
 func Conn() (*gorm.DB, error) {
-	pg := fmt.Sprintf("host= %v user=%v password=%v dbname=%v port=%v sslmode=%v", host, user, pass, dbname, port, sslmode)
+	pg := fmt.Sprintf("host= %v user=%v password=%v dbname=%v port=%v sslmode=%v TimeZone=Asia/Jakarta", host, user, pass, dbname, port, sslmode)
 	db, err := gorm.Open(postgres.Open(pg), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
