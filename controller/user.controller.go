@@ -12,10 +12,10 @@ import (
 
 var userService service.UserService = service.UserServiceImpl{}
 
-func SetUser(c *echo.Group, e *echo.Echo) {
+func SetUser(eg *echo.Group, e *echo.Echo) {
 	e.POST("/user", createUser)
 	e.POST("/api/login", login)
-	c.GET("/user/:id", getUserById)
+	eg.GET("/user/:id", getUserById)
 	// c.GET("/user", getUserById)
 }
 

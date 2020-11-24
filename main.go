@@ -17,15 +17,15 @@ func main() {
 	dao.SetDao(g)
 	service.SetService(g)
 
-	//set jwt
-	jwtGroup := config.SetJwt(e)
+	//set jwt group
+	eg := config.SetJwt(e)
 
 	//set controllers
 	controller.SetInit(e)
-	controller.SetUser(jwtGroup, e)
-	controller.SetAnswer(jwtGroup)
-	controller.SetEmployeeProfile(jwtGroup)
-	controller.SetCandidatProfile(jwtGroup)
+	controller.SetUser(eg, e)
+	controller.SetAnswer(eg)
+	controller.SetEmployeeProfile(eg)
+	controller.SetCandidatProfile(eg)
 
 	//start server
 	e.Logger.Fatal(e.Start(":1234"))

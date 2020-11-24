@@ -19,10 +19,6 @@ type BaseModel struct {
 	Count       int64      `gorm:"-"`
 }
 
-type Tabler interface {
-	TableName() string
-}
-
 func (base *BaseModel) BeforeCreate(tx *gorm.DB) error {
 	id := uuid.New()
 	base.Id = id.String()

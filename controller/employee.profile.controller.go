@@ -10,8 +10,8 @@ import (
 
 var employeeProfileService service.EmployeeProfileService = service.EmployeeProfileServiceImpl{}
 
-func SetEmployeeProfile(c *echo.Group) {
-	c.POST("/employee", createEmployeeProfile)
+func SetEmployeeProfile(eg *echo.Group) {
+	eg.POST("/employee", createEmployeeProfile)
 }
 
 func createEmployeeProfile(c echo.Context) (e error) {

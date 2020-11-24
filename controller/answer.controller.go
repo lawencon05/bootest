@@ -10,8 +10,8 @@ import (
 
 var answerService service.AnswerService = service.AnswerServiceImpl{}
 
-func SetAnswer(c *echo.Group) {
-	c.POST("/answer", createAnswer)
+func SetAnswer(eg *echo.Group) {
+	eg.POST("/answer", createAnswer)
 }
 
 func createAnswer(c echo.Context) (e error) {
