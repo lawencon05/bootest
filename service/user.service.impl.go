@@ -19,7 +19,8 @@ func (UserServiceImpl) CreateUser(user *model.Users) (u *model.Users, e error) {
 	result, err := bcrypt.GenerateFromPassword([]byte(user.Pwd), 4)
 	if err == nil {
 		user.Pwd = string(result)
-		*user.CreatedDate = model.Timestamp(time.Now())
+		var time = model.Timestamp(time.Now())
+		user.CreatedDate = &time
 		return userDao.CreateUser(user)
 	}
 	return nil, err
