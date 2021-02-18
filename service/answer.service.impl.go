@@ -1,8 +1,6 @@
 package service
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/dao"
@@ -16,7 +14,6 @@ type AnswerServiceImpl struct{}
 func (AnswerServiceImpl) CreateAnswer(hdr *model.AnswerHdr, dtl *[]model.AnswerDtl) (e error) {
 	defer config.CatchError(&e)
 	return g.Transaction(func(tx *gorm.DB) error {
-		*hdr.CreatedDate = model.Timestamp(time.Now())
 		if err := answerDao.CreateAnswerHdr(hdr, tx); err != nil {
 			return err
 		}

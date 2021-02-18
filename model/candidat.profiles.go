@@ -4,7 +4,7 @@ import "time"
 
 type CandidateProfiles struct {
 	BaseModel
-	UserId   string
+	UserId   string    `gorm:"type:varchar(50)"`
 	Users    Users     `gorm:"foreignKey:UserId"`
 	Fullname string    `json:"fullname"`
 	Address  string    `json:"address"`
