@@ -6,15 +6,22 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"lawencon.com/bootest/config"
+	"lawencon.com/bootest/dao"
 	"lawencon.com/bootest/model"
 	"lawencon.com/bootest/service"
 )
 
-var userService service.UserService = service.UserServiceImpl{}
+var userService service.UserService
 
-func SetUser(eg *echo.Group, e *echo.Echo) {
+func setUser() {
+	userService = service.UserServiceImpl{
+		UserDao: dao.UserDaoImpl{
+			DB: db,
+		},
+	}
+
 	e.POST("/user", createUser)
-	e.POST("/api/login", login)
+	e.POST("/api/user/login", login)
 	eg.GET("/user/:id", getUserById)
 	// c.GET("/user", getUserById)
 }

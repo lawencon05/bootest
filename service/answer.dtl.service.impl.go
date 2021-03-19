@@ -7,11 +7,12 @@ import (
 	"lawencon.com/bootest/model"
 )
 
-var dtlDao dao.AnswerDtlDao = dao.AnswerDtlDaoImpl{}
+type AnswerDtlServiceImpl struct{
+	dao.AnswerDtlDao
+	*gorm.DB
+}
 
-type AnswerDtlServiceImpl struct{}
-
-func (AnswerDtlServiceImpl) CreateAnswerDtl(data *model.AnswerDtl, tx *gorm.DB) (e error) {
+func (answerDtlService AnswerDtlServiceImpl) CreateAnswerDtl(data *model.AnswerDtl, tx *gorm.DB) (e error) {
 	defer config.CatchError(&e)
-	return dtlDao.CreateAnswerDtl(data, tx)
+	return answerDtlService.AnswerDtlDao.CreateAnswerDtl(data, tx)
 }

@@ -4,14 +4,21 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"lawencon.com/bootest/config"
+	"lawencon.com/bootest/dao"
 	"lawencon.com/bootest/model"
 	"lawencon.com/bootest/service"
 )
 
-var candidatProfileService service.CandidatProfileService = service.CandidatProfileServiceImpl{}
+var candidatProfileService service.CandidatProfileService
 
-func SetCandidatProfile(eg *echo.Group) {
+func setCandidatProfile() {
 	eg.POST("/candidate", createCandidatProfile)
+
+	candidatProfileService = service.CandidatProfileServiceImpl{
+		CandidatProfileDao: dao.CandidatProfileDaoImpl{
+			DB: db,
+		},
+	}
 }
 
 func createCandidatProfile(c echo.Context) (e error) {

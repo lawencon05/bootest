@@ -8,7 +8,9 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-type GormServicePostgreImpl struct{}
+type GormServicePostgreImpl struct{
+	*gorm.DB
+}
 
 const (
 	host    = "localhost"
@@ -19,10 +21,17 @@ const (
 	sslmode = "disable"
 )
 
-func (GormServicePostgreImpl) Conn() (*gorm.DB, error) {
+func (gormService *GormServicePostgreImpl) Conn() error {
 	pg := fmt.Sprintf("host= %v user=%v password=%v dbname=%v port=%v sslmode=%v TimeZone=Asia/Jakarta", host, user, pass, dbname, port, sslmode)
 
-	return gorm.Open(postgres.Open(pg), &gorm.Config{
+	db, err := gorm.Open(postgres.Open(pg), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
+
+	if(err != nil){
+		return err
+	}
+	
+	*gormService.DB = *db
+	return nil
 }

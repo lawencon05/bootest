@@ -4,14 +4,25 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"lawencon.com/bootest/config"
+	"lawencon.com/bootest/dao"
 	"lawencon.com/bootest/model"
 	"lawencon.com/bootest/service"
 )
 
-var answerService service.AnswerService = service.AnswerServiceImpl{}
+var answerService service.AnswerService
 
-func SetAnswer(eg *echo.Group) {
+func setAnswer() {
 	eg.POST("/answer", createAnswer)
+
+	answerService = service.AnswerServiceImpl{
+		DB: db,
+		AnswerDao:    dao.AnswerDaoImpl{
+			DB: db,
+		},
+		AnswerDtlDao: dao.AnswerDtlDaoImpl{
+			DB: db,
+		},
+	}
 }
 
 func createAnswer(c echo.Context) (e error) {

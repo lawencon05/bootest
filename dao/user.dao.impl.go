@@ -1,25 +1,28 @@
 package dao
 
 import (
+	"gorm.io/gorm"
 	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/model"
 )
 
-type UserDaoImpl struct{}
+type UserDaoImpl struct{
+	*gorm.DB
+}
 
-func (UserDaoImpl) CreateUser(user *model.Users) (u *model.Users, e error) {
+func (userDao UserDaoImpl) CreateUser(user *model.Users) (u *model.Users, e error) {
 	defer config.CatchError(&e)
-	result := g.Create(user)
+	result := userDao.DB.Create(user)
 	if result.Error == nil {
 		return user, nil
 	}
 	return nil, result.Error
 }
 
-func (UserDaoImpl) GetUserById(id string) (u model.Users, e error) {
+func (userDao UserDaoImpl) GetUserById(id string) (u model.Users, e error) {
 	defer config.CatchError(&e)
 	data := model.Users{BaseModel: model.BaseModel{Id: id}}
-	result := g.First(&data)
+	result := userDao.DB.First(&data)
 
 	if result.Error == nil {
 		data.Count = result.RowsAffected
@@ -28,10 +31,10 @@ func (UserDaoImpl) GetUserById(id string) (u model.Users, e error) {
 	return data, result.Error
 }
 
-func (UserDaoImpl) GetUserByUsername(username string) (u model.Users, e error) {
+func (userDao UserDaoImpl) GetUserByUsername(username string) (u model.Users, e error) {
 	defer config.CatchError(&e)
 	var data model.Users
-	result := g.Where("email = ?", username).Find(&data)
+	result := userDao.DB.Where("email = ?", username).Find(&data)
 
 	if result.Error == nil {
 		data.Count = result.RowsAffected

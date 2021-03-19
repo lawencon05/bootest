@@ -18,18 +18,17 @@ var tables = []interface{}{
 	&model.Users{},
 }
 
-var gormService db.GormService = db.GormServicePostgreImpl{}
-
-func Conn() (*gorm.DB, error) {
-	db, err := gormService.Conn()
+func SetDb() *gorm.DB {
+	var g = &gorm.DB{}
+	var gormService db.GormService = &db.GormServicePostgreImpl{
+		DB: g,
+	}
+	err := gormService.Conn()
 
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
-	return db, nil
-}
-
-func MigrateSchema(db *gorm.DB) {
-	db.AutoMigrate(tables...)
+	g.AutoMigrate(tables...)
+	return g
 }

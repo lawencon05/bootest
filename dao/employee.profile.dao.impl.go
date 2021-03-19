@@ -1,15 +1,18 @@
 package dao
 
 import (
+	"gorm.io/gorm"
 	"lawencon.com/bootest/config"
 	"lawencon.com/bootest/model"
 )
 
-type EmployeeProfileDaoImpl struct{}
+type EmployeeProfileDaoImpl struct{
+	*gorm.DB
+}
 
-func (EmployeeProfileDaoImpl) CreateEmployee(data *model.EmployeeProfiles) (e error) {
+func (empProfileDao EmployeeProfileDaoImpl) CreateEmployee(data *model.EmployeeProfiles) (e error) {
 	defer config.CatchError(&e)
-	result := g.Create(data)
+	result := empProfileDao.DB.Create(data)
 	if result.Error == nil {
 		return nil
 	}

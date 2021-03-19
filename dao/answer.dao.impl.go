@@ -6,9 +6,11 @@ import (
 	"lawencon.com/bootest/model"
 )
 
-type AnswerDaoImpl struct{}
+type AnswerDaoImpl struct{
+	*gorm.DB
+}
 
-func (AnswerDaoImpl) CreateAnswerHdr(data *model.AnswerHdr, tx *gorm.DB) (e error) {
+func (answerDao AnswerDaoImpl) CreateAnswerHdr(data *model.AnswerHdr, tx *gorm.DB) (e error) {
 	defer config.CatchError(&e)
 	if err := tx.Create(data).Error; err != nil {
 		return err

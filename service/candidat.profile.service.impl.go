@@ -6,11 +6,11 @@ import (
 	"lawencon.com/bootest/model"
 )
 
-var candidatDao dao.CandidatProfileDao = dao.CandidatProfileDaoImpl{}
+type CandidatProfileServiceImpl struct{
+	dao.CandidatProfileDao
+}
 
-type CandidatProfileServiceImpl struct{}
-
-func (CandidatProfileServiceImpl) CreateCandidat(data *model.CandidateProfiles) (e error) {
+func (candidateProfile CandidatProfileServiceImpl) CreateCandidat(data *model.CandidateProfiles) (e error) {
 	defer config.CatchError(&e)
-	return candidatDao.CreateCandidat(data)
+	return candidateProfile.CandidatProfileDao.CreateCandidat(data)
 }

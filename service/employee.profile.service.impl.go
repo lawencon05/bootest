@@ -6,11 +6,11 @@ import (
 	"lawencon.com/bootest/model"
 )
 
-var employeeDao dao.EmployeeProfileDao = dao.EmployeeProfileDaoImpl{}
+type EmployeeProfileServiceImpl struct{
+	dao.EmployeeProfileDao
+}
 
-type EmployeeProfileServiceImpl struct{}
-
-func (EmployeeProfileServiceImpl) CreateEmployee(data *model.EmployeeProfiles) (e error) {
+func (empProfile EmployeeProfileServiceImpl) CreateEmployee(data *model.EmployeeProfiles) (e error) {
 	defer config.CatchError(&e)
-	return employeeDao.CreateEmployee(data)
+	return empProfile.EmployeeProfileDao.CreateEmployee(data)
 }
